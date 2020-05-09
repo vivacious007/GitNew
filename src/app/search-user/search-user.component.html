@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="col-md-12 col-sm-12 col-xs-12" style="margin:10px 0px;">
+    <h1 class="heading1">Search Github Users</h1>
+    <form class="form-inline my-2 my-lg-0">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <input type="text" class="form-control" id="searchUser" name="search" [(ngModel)]="sendUsername"
+            placeholder="Search Github User.." (keyup)="searchUser()" />
+        </div>
+        <!-- <button class="btn btn-primary my2-my-sm-0" type="button">Search</button> -->
+
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" *ngIf="Username">
+    <div class="row">
+      <div class="col-md-4">
+        <div id="userDetails" class="card" style="width: 18rem;" *ngFor="let x of Username">
+          <img src='{{x.avatar_url}}' class="card-img-top" alt="DP">
+          <div class="card-body">
+            <h4 class="card-title">{{x.name}}</h4>
+            <p>{{x.bio}}</p>
+            <span class="card-text">
+              Name - {{x.name}}<br />
+              Company- {{x.company}}<br />
+              Location- {{x.location}}<br />
+              Open For Hiring- {{x.hireable ? 'Yes':'No'}}<br />
+            </span>
+            <a href='{{x.html_url}}' class="btn btn-primary">View Profile</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-8" *ngFor="let x of Username">
+        <div class="col-md-12">
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <div class="data-widget data-widget-1" aria-labelledby="dw1">
+                <div class="data-widget-icon" aria-hidden="true">
+                  <i class="fa fa-users"></i>
+                </div>
+                <div class="data-widget-data">
+                  <p class="data-description" id="dw1">Followers</p>
+                  <p class="data-value"> {{x.followers}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="data-widget data-widget-2" aria-labelledby="dw2">
+                <div class="data-widget-icon" aria-hidden="true">
+                  <i class="fa fa-user-plus"></i>
+                </div>
+                <div class="data-widget-data">
+                  <p class="data-description" id="dw2">Following</p>
+                  <p class="data-value">{{x.following}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="data-widget data-widget-3" aria-labelledby="dw3">
+                <div class="data-widget-icon" aria-hidden="true">
+                  <i class="fa fa-user-secret"></i>
+                </div>
+                <div class="data-widget-data">
+                  <p class="data-description" id="dw3">Repositories</p>
+                  <p class="data-value"> {{x.public_repos}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card">
+            <h5 style="padding: 5px;">Latest Repositories</h5>
+            <!-- default -->
+            <div class="card card-collapsible" *ngFor="let repo of repoList">
+              <button class="card-header border-0 d-flex justify-content-between align-items-center repoLinks"
+                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
+                [ngClass]="{closed: isCollapsed}" matRipple>
+                {{repo.full_name}}
+                <i class="fa fa-angle-down"
+                  [ngClass]="{'pbi-minimal-down': !isCollapsed, 'pbi-minimal-right': isCollapsed}"
+                  aria-hidden="true"></i>
+              </button>
+              <div class="card-body" id="collapseExample" [ngbCollapse]="isCollapsed">
+                <a class="repoLinks" target="_blank" href='{{repo.html_url}}'>
+                  <h4 class="card-title ">{{repo.full_name}}</h4>
+                </a>
+
+                <p>{{repo.description}}</p>
+                <div class="row"></div>
+                <p class="card-text">
+
+                  <span style="display: inline-block;">
+                    <i class="fa fa-star" style="padding:5px;"></i> {{repo.stargazers_count}}</span>
+
+                  <span style="margin-left:10px;display: inline-block;">
+                    <i class="fa fa-code-fork" style="padding:5px;"></i>{{repo.forks_count}}</span>
+
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
