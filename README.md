@@ -2,6 +2,8 @@
 
 This project was created on Angular 8.
 
+Demo - https://vivacious007.github.io/GitNew/
+
 ## Installation
 
 After cloning the repository on your local machine. Run the command `npm install` on cmd.
